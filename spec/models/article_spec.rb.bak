@@ -1,0 +1,18 @@
+require 'rails_helper'
+
+RSpec.describe Article, type: :model do
+  before(:each) { p 'Article 内の before(:each)' } # このグループ内のテストケースの前に実行される
+
+  before(:all) { p 'Article 内の before(:all)'} # このグループ内の最初のテストケースの前に一度だけ実行される
+
+  after(:each) { p 'Article 内の after(:each)'} # このグループ内のすべてのテストケースの後に実行される
+
+  after(:all) { p 'Article 内の after(:all)'} # このグループ内の最後のテストケースの後に一度だけ実行される
+
+  it { p 'テスト実行1' }
+
+  describe '入れ子のテスト' do
+    before(:each) { p 'グループ内に定義されたフックはそのグループ内だけに実行されます' }
+    it { p 'テスト実行2'}
+  end
+end

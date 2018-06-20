@@ -2,17 +2,20 @@ require 'rails_helper'
 
 RSpec.describe Article, type: :model do
   describe '.abbreviate_title' do
-    it '記事タイトルがそのまま返ること' do
-      article = Article.new(title: 'タイトルです')
-      expect(article.abbreviated_title).to eq 'タイトルです'
+    let(:article) { Article.new(title: title) }
+    context '記事タイトルが20文字未満の場合' do
+      let(:title) { 'タイトル' }
+      it '記事タイトルがそのまま返ること' do
+        expect(article.abbreviated_title).to eq 'タイトル'
+      end
     end
-  end
 
-  describe '.publish' do
-    it '記事が公開状態になること' do
-      article = Article.new(status: :draft)
-      article.publish
-      expect(article.published?).to be_truthy
+  context '記事タイトルが20文字以上の場合' do
+    # 追加されたサンプル
+      let(:title) { 'a' * 20 }
+      it '記事タイトルが省略されること' do
+        expect(article.abbreviated_title).to eq "#{'a' * 19}..."
+      end
     end
   end
 end
