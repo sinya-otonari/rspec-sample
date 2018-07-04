@@ -11,4 +11,10 @@ class Article < ApplicationRecord
     return if self.published?
     update({status: Article.statuses['published'], published_at: Time.current})
   end
+  # 20文字ごとに記事タイトルに改行コードを入れる
+  # 最後が改行コードになる場合は改行コードはつかない
+  def break_title
+    return if title.nil?
+    title.scan(/.{1,20}/).join('\n')
+  end
 end
