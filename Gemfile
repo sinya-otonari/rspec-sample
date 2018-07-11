@@ -34,6 +34,7 @@ group :development, :test do
   gem 'faker'
   gem 'pry-rails'
   gem 'pry-coolline'
+  gem 'simplecov'
 end
 
 group :development do
